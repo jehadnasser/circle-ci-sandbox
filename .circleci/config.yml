@@ -19,8 +19,7 @@ jobs:
     steps:
       - run: |
           echo "world"
-    requires:
-      - print_hello
+    
 
   say-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
@@ -42,4 +41,5 @@ workflows:
     jobs:
       - say-hello
       - print_hello
-      - print_world
+      - print_world:
+          requires: [print_hello]
