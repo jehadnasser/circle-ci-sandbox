@@ -6,15 +6,15 @@ jobs:
       - image: cimg/node:18.4.0
     steps:
       - run: |
-          node --version
-          echo "hello"
+          echo "used docker image:"
+          echo $ENV_IMAGE_NAME
 
   print_world:
     docker:
       - image: cimg/node:18.4.0
     steps:
       - run: |
-          echo "world"
+          echo "project git url: " << pipeline.project.git_url >>
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
