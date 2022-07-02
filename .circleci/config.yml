@@ -19,7 +19,7 @@ jobs:
       - attach_workspace:
           at: /tmp/workspace
       - run: |
-          cat output.txt
+          cat /tmp/workspace/output.txt
           echo "project git url: " << pipeline.project.git_url >>
 
 # Invoke jobs via workflows
