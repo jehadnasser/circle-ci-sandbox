@@ -33,6 +33,17 @@ jobs:
           cat /tmp/workspace/output.txt
           echo "project git url: " << pipeline.project.git_url >>
 
+
+  causing_an_error:
+    executor: my-executor
+    steps:
+      - run: echo $NON_EXISTS_VAR
+
+  rollback:
+    executor: my-executor
+    steps:
+      - run: echo "Alert!!! Rolling back due to some error!"
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
