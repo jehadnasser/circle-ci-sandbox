@@ -36,7 +36,7 @@ jobs:
   causing_an_error:
     executor: my-executor
     steps:
-      - run: print "alle gute"
+      - run: echo "alle gute"
       - run: 
           name: Rolling back the workflow on error
           command: echo "Alert!!! Rolling back due to some error!"
