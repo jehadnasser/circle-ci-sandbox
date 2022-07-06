@@ -15,6 +15,7 @@ jobs:
   save_hello_world_output:
     executor: my-executor
     steps:
+      - print_pipeline_id
       - run: mkdir -p /tmp/workspace
       - run: echo "hello world" > /tmp/workspace/output.txt
       - persist_to_workspace:
@@ -37,7 +38,6 @@ jobs:
 workflows:
   save-print-hello-workflow:
     jobs:
-      - print_pipeline_id
       - save_hello_world_output
       - print_output_file:
           requires: [save_hello_world_output]
