@@ -36,7 +36,7 @@ jobs:
   causing_an_error:
     executor: my-executor
     steps:
-      - run: echo NON_EXISTS_VAR
+      - run: 5+u
 
   rollback:
     executor: my-executor
