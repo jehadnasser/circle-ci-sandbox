@@ -1,9 +1,19 @@
 version: 2.1
 
-jobs:
-  save_hello_world_output:
+executors:
+  my-executor:
     docker:
       - image: cimg/base:2022.06
+
+commands:
+  print_pipeline_id:
+    description: "A command to print CIRCLE_WORKFLOW_ID"
+    steps:
+      - run: echo $CIRCLE_WORKFLOW_ID
+
+jobs:
+  save_hello_world_output:
+    executor: my-executor
     steps:
       - run: mkdir -p /tmp/workspace
       - run: echo "hello world" > /tmp/workspace/output.txt
@@ -13,11 +23,11 @@ jobs:
             - output.txt
 
   print_output_file:
-    docker:
-      - image: cimg/base:2022.06
-    steps: 
+    executor: my-executor
+    steps:
       - attach_workspace:
           at: /tmp/workspace
+      - print_pipeline_id
       - run: |
           cat /tmp/workspace/output.txt
           echo "project git url: " << pipeline.project.git_url >>
@@ -27,6 +37,7 @@ jobs:
 workflows:
   save-print-hello-workflow:
     jobs:
+      - print_pipeline_id
       - save_hello_world_output
       - print_output_file:
           requires: [save_hello_world_output]
