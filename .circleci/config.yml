@@ -37,14 +37,18 @@ jobs:
     executor: my-executor
     steps:
       - run: 5+u
-
-  rollback:
-    executor: my-executor
-    steps:
       - run: 
           name: Rolling back the workflow on error
           command: echo "Alert!!! Rolling back due to some error!"
           when: on_fail
+
+  # rollback:
+  #   executor: my-executor
+  #   steps:
+  #     - run: 
+  #         name: Rolling back the workflow on error
+  #         command: echo "Alert!!! Rolling back due to some error!"
+  #         when: on_fail
     
 
 # Invoke jobs via workflows
@@ -56,4 +60,4 @@ workflows:
       - print_output_file:
           requires: [save_hello_world_output]
       - causing_an_error
-      - rollback
+      # - rollback
