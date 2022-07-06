@@ -33,7 +33,6 @@ jobs:
           cat /tmp/workspace/output.txt
           echo "project git url: " << pipeline.project.git_url >>
 
-
   causing_an_error:
     executor: my-executor
     steps:
@@ -52,3 +51,5 @@ workflows:
       - save_hello_world_output
       - print_output_file:
           requires: [save_hello_world_output]
+      - causing_an_error
+      - rollback
