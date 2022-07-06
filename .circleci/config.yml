@@ -41,7 +41,11 @@ jobs:
   rollback:
     executor: my-executor
     steps:
-      - run: echo "Alert!!! Rolling back due to some error!"
+      - run: 
+          name: Rolling back the workflow on error
+          command: echo "Alert!!! Rolling back due to some error!"
+          when: on_fail
+    
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
